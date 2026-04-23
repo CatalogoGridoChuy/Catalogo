@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+<<<<<<< HEAD
+=======
+/* =========================
+   BASE
+========================= */
+
+>>>>>>> b0aefa3c7d55870a771540b96718505a77629a92
 *{
     margin:0;
     padding:0;
@@ -7,6 +14,7 @@
 }
 
 body{
+<<<<<<< HEAD
     font-family: 'Segoe UI', sans-serif;
     background:#f5f7fb;
 }
@@ -56,11 +64,62 @@ body{
     text-decoration:none;
     color:white;
     font-weight:500;
+=======
+    font-family:'Inter', sans-serif;
+    background:#f6f7fb;
+    color:#0f172a;
+}
+
+/* =========================
+   NAVBAR PREMIUM
+========================= */
+
+.navbar-custom{
+    position:fixed;
+    top:0;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:16px 40px;
+    background:rgba(11,18,32,0.92);
+    backdrop-filter: blur(10px);
+
+    z-index:1000;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+    position:absolute;
+    left:20px;
+    height:85px;
+    object-fit:contain;
+}
+
+.navbar-custom nav{
+    display:flex;
+    gap:26px;
+}
+
+.navbar-custom a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    opacity:.8;
+    transition:.2s;
+}
+
+.navbar-custom a:hover{
+    opacity:1;
+>>>>>>> b0aefa3c7d55870a771540b96718505a77629a92
 }
 
 /* carrito */
 .cart{
     position:absolute;
+<<<<<<< HEAD
     right:30px;
     background:none;
     border:none;
@@ -70,12 +129,23 @@ body{
 
 .cart img{
     width:108px;
+=======
+    right:25px;
+    background:none;
+    border:none;
+    cursor:pointer;
+}
+
+.cart img{
+    width:48px;
+>>>>>>> b0aefa3c7d55870a771540b96718505a77629a92
     transition:.3s;
 }
 
 .cart:hover img{
     transform:scale(1.08);
 }
+<<<<<<< HEAD
 .cart span{
     position:absolute;
     top:5px;
@@ -98,6 +168,9 @@ body{
 
     box-shadow:0 4px 10px rgba(0,0,0,0.3);
 }
+=======
+
+>>>>>>> b0aefa3c7d55870a771540b96718505a77629a92
 /* =========================
    ESPACIADOR
 ========================= */

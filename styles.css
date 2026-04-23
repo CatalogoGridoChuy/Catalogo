@@ -41,7 +41,11 @@ body{
     top:50%;
     transform:translateY(-50%);
 
+<<<<<<< HEAD
     height:300px; 
+=======
+    height:300px; /* 🔥 grande */
+>>>>>>> b0aefa3c7d55870a771540b96718505a77629a92
 }
 
 /* NAV */
@@ -56,6 +60,34 @@ body{
     font-weight:500;
 }
 
+<<<<<<< HEAD
+=======
+/* CARRITO GRANDE */
+.cart{
+    position:absolute;
+    right:40px;
+    top:50%;
+    transform:translateY(-50%);
+
+    background:none;
+    border:none;
+}
+
+.cart img{
+    width:100px; /* 🔥 más grande */
+}
+
+.cart span{
+    position:absolute;
+    top:-5px;
+    right:18px;
+    background:red;
+    color:white;
+    font-size:12px;
+    border-radius:50%;
+    padding:3px 6px;
+}
+>>>>>>> b0aefa3c7d55870a771540b96718505a77629a92
 
 /* HERO */
 .hero{
