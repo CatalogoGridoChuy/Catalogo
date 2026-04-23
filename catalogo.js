@@ -1,11 +1,7 @@
 const catalogo = document.getElementById("catalogo");
 const contadorCarrito = document.querySelector(".cart span");
 
-<<<<<<< HEAD
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-=======
-let carrito = [];
->>>>>>> b0aefa3c7d55870a771540b96718505a77629a92
 
 /* =========================
    PRODUCTOS COMPLETOS
@@ -304,11 +300,8 @@ function agregarConSabor(p, sabor = null){
     timer: 1200,
     showConfirmButton: false
   });
-<<<<<<< HEAD
 
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-=======
->>>>>>> b0aefa3c7d55870a771540b96718505a77629a92
+  
 }
 /* =========================
    CARRITO UI
