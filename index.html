@@ -53,20 +53,24 @@
 
 <!-- CATEGORÍAS -->
 <section class="categorias">
-
     <h2>Nuestros productos</h2>
-
     <div class="categorias-grid">
-
         <div class="cat" onclick="goCatalogo('Tentación')">Tentación</div>
         <div class="cat" onclick="goCatalogo('Tortas')">Tortas</div>
         <div class="cat" onclick="goCatalogo('Bombones')">Bombones</div>
         <div class="cat" onclick="goCatalogo('Familiares')">Familiar</div>
         <div class="cat" onclick="goCatalogo('Postres')">Postres</div>
         <div class="cat" onclick="goCatalogo('Palitos')">Palitos</div>
-        <div class="cat" onclick="goCatalogo('Todos')">Por kilo</div>
-
+        <div class="cat" onclick="goCatalogo('Kilo')">Por kilo</div>
     </div>
+</section>
+
+<script>
+    function goCatalogo(categoria) {
+        // Redirige a la carpeta pages y pasa el filtro por la URL
+        window.location.href = `pages/catalogo.html?filtro=${categoria}`;
+    }
+</script>
 
 </section>
 

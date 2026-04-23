@@ -4,6 +4,18 @@ const contadorCarrito = document.querySelector(".cart span");
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 /* =========================
+    SABORES GLOBALES (PARA KILO)
+========================= */
+const listaSaboresKilo = [
+  "Chocolate", "Chocolate con almendras", "Chocolate blanco", "Chocolate Suizo", "Chocolate blanco Oreo",
+  "Dulce de leche", "Dulce de leche granizado", "Dulce de leche con nuez", "Dulce de leche con brownie", "Super Dulce de leche",
+  "Ananá", "Banana con dulce de leche", "Cereza", "Frutilla", "Kinotos al whisky", "Durazno",
+  "Crema Americana", "Crema Rusa", "Vainilla", "Menta Granizada", "Granizado",
+  "Super Gridito", "Pistacho", "Tiramisú", "Tramontana", "Sambayón", "Crema Cookie", "Flan", "Mascarpone con frutos del bosque", "Grido Marroc", "Capuccino Granizado",
+  "Maracuyá", "Limón", "Frutilla (agua)", "Frutos rojos", "Naranja"
+];
+
+/* =========================
    PRODUCTOS COMPLETOS
 ========================= */
 
@@ -27,7 +39,6 @@ const secciones = [
       }
     ]
   },
-
   {
     nombre: "Tortas Heladas",
     productos: [
@@ -57,7 +68,6 @@ const secciones = [
       }
     ]
   },
-
   {
     nombre: "Bombones",
     productos: [
@@ -103,7 +113,6 @@ const secciones = [
       }
     ]
   },
-
   {
     nombre: "Postres",
     productos: [
@@ -141,7 +150,6 @@ const secciones = [
       }
     ]
   },
-
   {
     nombre: "Palitos",
     productos: [
@@ -171,7 +179,6 @@ const secciones = [
       }
     ]
   },
-
   {
     nombre: "Familiares",
     productos: [
@@ -182,6 +189,41 @@ const secciones = [
         img: "../img/catalogo/familiar.png",
         descripcion: "3 litros combinados a elección",
         precio: 550
+      }
+    ]
+  },
+  {
+    nombre: "Helado por Kilo",
+    productos: [
+      {
+        id: 100,
+        categoria: "Kilo",
+        nombre: "1/4 Kilo",
+        img: "../img/catalogo/kilo.png",
+        descripcion: "Hasta 2 sabores a elección",
+        precio: 180,
+        maxSabores: 2,
+        esKilo: true
+      },
+      {
+        id: 101,
+        categoria: "Kilo",
+        nombre: "1/2 Kilo",
+        img: "../img/catalogo/kilo.png",
+        descripcion: "Hasta 3 sabores a elección",
+        precio: 290,
+        maxSabores: 3,
+        esKilo: true
+      },
+      {
+        id: 102,
+        categoria: "Kilo",
+        nombre: "1 Kilo",
+        img: "../img/catalogo/kilo.png",
+        descripcion: "Hasta 4 sabores a elección",
+        precio: 520,
+        maxSabores: 4,
+        esKilo: true
       }
     ]
   }
@@ -202,22 +244,15 @@ const productos = secciones.flatMap(sec =>
 function renderCatalogo(lista = productos){
   catalogo.innerHTML = lista.map(p => `
     <div class="card-producto">
-
       <img src="${p.img}">
-
       <div class="card-body">
-
         <h3>${p.nombre}</h3>
         <p>${p.descripcion}</p>
-
         <span class="precio">$${p.precio}</span>
-
         <button onclick="agregarCarrito(${p.id})">
           Agregar al carrito
         </button>
-
       </div>
-
     </div>
   `).join("");
 }
@@ -231,52 +266,73 @@ function buscarProducto(id){
 }
 
 /* =========================
-   AGREGAR (CON SABORES 🔥)
+   AGREGAR (ACTUALIZADO 🔥)
 ========================= */
 
 function agregarCarrito(id){
   const p = buscarProducto(id);
 
-  // 🔥 SI TIENE SABORES (solo Tentación)
-  if(p.sabores){
+  // 🔥 CASO 1: PRODUCTOS POR KILO (Selección múltiple)
+  if(p.esKilo) {
+    let opcionesHtml = `<div style="text-align:left; max-height:300px; overflow-y:auto; border:1px solid #eee; padding:10px;">`;
+    listaSaboresKilo.forEach(s => {
+      opcionesHtml += `
+        <label style="display:block; margin-bottom:8px; cursor:pointer;">
+          <input type="checkbox" name="saborKilo" value="${s}"> ${s}
+        </label>`;
+    });
+    opcionesHtml += `</div>`;
 
+    Swal.fire({
+      title: `Sabores para tu ${p.nombre}`,
+      html: opcionesHtml,
+      confirmButtonText: "Agregar",
+      showCancelButton: true,
+      preConfirm: () => {
+        const seleccionados = Array.from(document.querySelectorAll('input[name="saborKilo"]:checked')).map(el => el.value);
+        if (seleccionados.length === 0) {
+          Swal.showValidationMessage('Debes elegir al menos 1 sabor');
+          return false;
+        }
+        if (seleccionados.length > p.maxSabores) {
+          Swal.showValidationMessage(`Máximo ${p.maxSabores} sabores`);
+          return false;
+        }
+        return seleccionados.join(", ");
+      }
+    }).then(result => {
+      if(result.isConfirmed) agregarConSabor(p, result.value);
+    });
+    return;
+  }
+
+  // 🔥 CASO 2: TENTACIÓN (Sabor único)
+  if(p.sabores){
     let opciones = p.sabores.map(s => 
       `<option value="${s}">${s}</option>`
     ).join("");
 
     Swal.fire({
       title: "Elegí un sabor",
-      html: `
-        <select id="saborSelect" style="width:100%; padding:10px; border-radius:8px;">
-          ${opciones}
-        </select>
-      `,
+      html: `<select id="saborSelect" style="width:100%; padding:10px; border-radius:8px;">${opciones}</select>`,
       confirmButtonText: "Agregar",
       showCancelButton: true,
-      cancelButtonText: "Cancelar",
-      preConfirm: () => {
-        return document.getElementById("saborSelect").value;
-      }
+      preConfirm: () => document.getElementById("saborSelect").value
     }).then(result => {
-
-      if(result.isConfirmed){
-        agregarConSabor(p, result.value); // 🔥 usamos nueva función
-      }
-
+      if(result.isConfirmed) agregarConSabor(p, result.value);
     });
-
     return;
   }
 
-  // 🔥 productos normales
+  // 🔥 CASO 3: PRODUCTOS NORMALES
   agregarConSabor(p);
 }
+
 /* =========================
    AGREGAR CON SABOR 🔥
 ========================= */
 
 function agregarConSabor(p, sabor = null){
-
   const existe = carrito.find(x => 
     x.id === p.id && x.sabor === sabor
   );
@@ -286,7 +342,7 @@ function agregarConSabor(p, sabor = null){
   } else {
     carrito.push({
       ...p,
-      sabor, // 🔥 guardamos el sabor
+      sabor,
       qty:1
     });
   }
@@ -300,9 +356,8 @@ function agregarConSabor(p, sabor = null){
     timer: 1200,
     showConfirmButton: false
   });
-
-  
 }
+
 /* =========================
    CARRITO UI
 ========================= */
@@ -324,9 +379,10 @@ overlay.addEventListener("click", toggleCart);
 ========================= */
 
 function updateCart(){
-
   const container = document.getElementById("cartItems");
   const totalEl = document.getElementById("cartTotal");
+
+  localStorage.setItem("carrito", JSON.stringify(carrito));
 
   if(carrito.length === 0){
     container.innerHTML = `<div class="empty-cart">🛒 El carrito está vacío</div>`;
@@ -337,28 +393,22 @@ function updateCart(){
 
   let total = 0;
 
-  container.innerHTML = carrito.map(p => {
-
+  container.innerHTML = carrito.map((p, index) => {
     total += p.precio * p.qty;
-
     return `
       <div class="cart-item">
-
         <img src="${p.img}">
-
         <div class="cart-info">
           <h4>${p.nombre}</h4>
+          ${p.sabor ? `<small style="display:block; color:#666; margin-bottom:5px;">${p.sabor}</small>` : ""}
           <p>$${p.precio}</p>
-
           <div class="qty">
-            <button onclick="changeQty(${p.id},-1)">-</button>
+            <button onclick="changeQty(${index},-1)">-</button>
             <span>${p.qty}</span>
-            <button onclick="changeQty(${p.id},1)">+</button>
+            <button onclick="changeQty(${index},1)">+</button>
           </div>
         </div>
-
-        <button class="remove" onclick="removeItem(${p.id})">✕</button>
-
+        <button class="remove" onclick="removeItem(${index})">✕</button>
       </div>
     `;
   }).join("");
@@ -368,23 +418,17 @@ function updateCart(){
 }
 
 /* =========================
-   CONTROL
+   CONTROL (POR INDEX PARA EVITAR ERRORES)
 ========================= */
 
-function changeQty(id, amount){
-  const item = carrito.find(p => p.id === id);
-
-  item.qty += amount;
-
-  if(item.qty <= 0){
-    carrito = carrito.filter(p => p.id !== id);
-  }
-
+function changeQty(index, amount){
+  carrito[index].qty += amount;
+  if(carrito[index].qty <= 0) carrito.splice(index, 1);
   updateCart();
 }
 
-function removeItem(id){
-  carrito = carrito.filter(p => p.id !== id);
+function removeItem(index){
+  carrito.splice(index, 1);
   updateCart();
 }
 
@@ -393,16 +437,15 @@ function removeItem(id){
 ========================= */
 
 function checkoutWhatsApp(){
-
   let msg = "Hola! pedido:%0A%0A";
 
   carrito.forEach(p => {
-    msg += `🍦 ${p.nombre} x${p.qty}%0A`;
+    const saborTexto = p.sabor ? ` (${p.sabor})` : "";
+    msg += `🍦 *${p.nombre}* x${p.qty}${saborTexto}%0A`;
   });
 
   const total = carrito.reduce((a,b)=>a + b.precio * b.qty, 0);
-
-  msg += `%0ATotal: $${total}`;
+  msg += `%0A*Total: $${total}*`;
 
   window.open(`https://wa.me/598XXXXXXXX?text=${msg}`, "_blank");
 }
@@ -412,7 +455,7 @@ renderCatalogo();
 updateCart();
 
 /* =========================
-   FILTROS (ARREGLADO)
+   FILTROS (VERSION FINAL ROBUSTA)
 ========================= */
 
 const botonesFiltro = document.querySelectorAll(".cat");
@@ -420,21 +463,75 @@ const botonesFiltro = document.querySelectorAll(".cat");
 botonesFiltro.forEach(btn => {
   btn.addEventListener("click", () => {
 
-    // activar botón
+    // 1. Estética: Cambiar el botón activo
     botonesFiltro.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
 
-    const categoria = btn.innerText.trim();
+    // 2. Obtener el texto del botón y normalizarlo
+    // .toLowerCase() hace que "Familiares" sea igual a "familiares"
+    let categoriaBuscada = btn.innerText.trim().toLowerCase();
 
-    if(categoria === "Todos"){
+    // 3. Caso especial: Botón "Todos"
+    if(categoriaBuscada === "todos"){
       renderCatalogo(productos);
       return;
     }
 
+    // 4. Filtrado
     const filtrados = productos.filter(p => {
-      return p.categoria.toLowerCase() === categoria.toLowerCase();
+      // Comparamos la categoría del producto (en minúsculas) con el botón
+      const catProducto = p.categoria.toLowerCase();
+      
+      // Retornamos verdadero si coinciden exactamente 
+      // O si el botón es "kilo" y la categoría es "kilo"
+      return catProducto === categoriaBuscada;
     });
 
     renderCatalogo(filtrados);
   });
+});
+
+/* =========================
+   RECIBIR FILTRO DESDE EL INDEX (OPCIONAL)
+========================= */
+window.addEventListener("load", () => {
+    const params = new URLSearchParams(window.location.search);
+    const filtroURL = params.get("filtro");
+
+    if (filtroURL) {
+        const botones = document.querySelectorAll(".cat");
+        botones.forEach(btn => {
+            if (btn.innerText.trim().toLowerCase() === filtroURL.toLowerCase()) {
+                btn.click();
+                document.getElementById("catalogo")?.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+});
+
+/* =========================
+   LÓGICA PARA RECIBIR FILTRO DEL INDEX
+========================= */
+window.addEventListener("load", () => {
+    const params = new URLSearchParams(window.location.search);
+    const filtroURL = params.get("filtro");
+
+    if (filtroURL) {
+        const botones = document.querySelectorAll(".cat");
+        
+        botones.forEach(btn => {
+            const textoBoton = btn.innerText.trim();
+            
+            // Comprobamos si el botón coincide (ej: 'Kilo' coincide con 'Por Kilo')
+            if (textoBoton.toLowerCase() === filtroURL.toLowerCase() || 
+               (filtroURL === 'Kilo' && textoBoton === 'Por Kilo')) {
+                
+                // Hace click automáticamente en el filtro
+                btn.click();
+                
+                // Despliega la vista hasta los productos suavemente
+                document.getElementById("catalogo").scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
 });
