@@ -18,7 +18,7 @@ body{
 
     display:flex;
     align-items:center;
-    justify-content:center; /* centramos el nav */
+    justify-content:center; 
 
     padding:55px 40px;
     background: linear-gradient(
@@ -31,10 +31,9 @@ body{
     box-shadow:0 5px 20px rgba(0,0,0,0.08);
     z-index:1000;
 
-    position: relative; /* 🔥 clave para absolute */
+    position: relative; 
 }
 
-/* LOGO GRANDE SIN ROMPER */
 .logo{
     position:absolute;
     left:10px;
@@ -55,7 +54,6 @@ body{
     color:white;
     font-weight:500;
 }
-
 
 /* HERO */
 .hero{
