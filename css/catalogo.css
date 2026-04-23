@@ -1,0 +1,664 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background:#f5f7fb;
+}
+
+/* NAVBAR */
+.navbar-custom{
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center; /* centramos el nav */
+
+    padding:55px 40px;
+    background: linear-gradient(
+        to right,
+        #020617,
+        #0a1e50,
+        #1c3faa
+    );
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    z-index:1000;
+
+    position: relative; /* 🔥 clave para absolute */
+}
+
+/* LOGO GRANDE SIN ROMPER */
+.logo{
+    position:absolute;
+    left:10px;
+    top:50%;
+    transform:translateY(-50%);
+
+    height:300px; /* 🔥 grande */
+}
+
+/* NAV */
+.navbar-custom nav{
+    display:flex;
+    gap:30px;
+}
+
+.navbar-custom a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+}
+
+/* carrito */
+.cart{
+    position:absolute;
+    right:30px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    
+}
+
+.cart img{
+    width:108px;
+    transition:.3s;
+}
+
+.cart:hover img{
+    transform:scale(1.08);
+}
+.cart span{
+    position:absolute;
+    top:5px;
+    right:9px;
+
+    background:#ef4444;
+    color:white;
+
+    font-size:11px;
+    font-weight:700;
+
+    width:20px;
+    height:20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+}
+/* =========================
+   ESPACIADOR
+========================= */
+
+.spacer{
+    height:120px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.catalogo-hero{
+    text-align:center;
+    padding:90px 20px 30px;
+}
+
+.catalogo-hero h1{
+    font-size:44px;
+    font-weight:800;
+    letter-spacing:-0.5px;
+}
+
+.catalogo-hero p{
+    color:#64748b;
+    margin-top:6px;
+}
+
+/* =========================
+   FILTROS
+========================= */
+
+.categorias-filtro{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    padding:10px 20px 25px;
+}
+
+.cat{
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:500;
+
+    background:#e5e7eb;
+    color:#334155;
+
+    cursor:pointer;
+    transition:.2s;
+    user-select:none;
+}
+
+.cat:hover{
+    background:#111827;
+    color:white;
+    transform:translateY(-2px);
+}
+
+.cat.active{
+    background:#111827;
+    color:white;
+}
+
+/* =========================
+   GRID / CARDS VIEW
+========================= */
+
+.catalogo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:22px;
+    padding:40px 60px;
+}
+
+/* CARDS VIEW */
+.catalogo-grid.cards-view{
+    grid-template-columns:1fr;
+    gap:14px;
+}
+
+.cards-view .card-producto{
+    flex-direction:row;
+    align-items:center;
+    gap:18px;
+    padding:12px;
+}
+
+.cards-view .card-producto img{
+    width:120px;
+    height:100px;
+    border-radius:12px;
+}
+
+.cards-view .card-body{
+    padding:0;
+}
+
+/* =========================
+   CARD PRODUCTO
+========================= */
+
+.card-producto{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    transition:.3s;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.card-producto:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px rgba(0,0,0,0.12);
+}
+
+.card-producto img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+}
+
+/* contenido */
+.card-body{
+    padding:14px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.card-body h3{
+    font-size:16px;
+    font-weight:700;
+}
+
+.card-body p{
+    font-size:13px;
+    color:#64748b;
+    min-height:34px;
+}
+
+.precio{
+    font-size:16px;
+    font-weight:800;
+    color:#111827;
+}
+
+.card-body small{
+    font-size:12px;
+    color:#64748b;
+}
+
+/* botón */
+.card-body button{
+    margin-top:10px;
+    padding:10px;
+    border:none;
+    border-radius:12px;
+
+    background:#111827;
+    color:white;
+
+    font-weight:600;
+    font-size:13px;
+
+    cursor:pointer;
+    transition:.2s;
+}
+
+.card-body button:hover{
+    background:#1f2937;
+    transform:scale(1.02);
+}
+
+/* =========================
+   BANNER (FIX PRO)
+========================= */
+
+.catalogo-banner{
+    padding:30px 60px;
+}
+
+.catalogo-banner img{
+    width:100%;
+    max-height:260px;
+    object-fit:cover;
+    border-radius:18px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* =========================
+   FOOTER PREMIUM FIX
+========================= */
+
+.footer{
+    background:#0b1220;
+    color:white;
+    margin-top:60px;
+}
+
+.footer-content{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+    padding:60px;
+}
+
+.footer-content p{
+    font-size:13px;
+    opacity:.8;
+}
+
+/* redes FIX */
+.redes{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:14px;
+}
+
+.redes a{
+    width:42px;
+    height:42px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(255,255,255,0.1);
+    border-radius:50%;
+
+    transition:.3s;
+}
+
+.redes a img{
+    width:18px;
+    height:18px;
+    object-fit:contain;
+}
+
+.redes a:hover{
+    transform:translateY(-4px);
+}
+
+/* mapa */
+.mapa iframe{
+    width:100%;
+    height:140px;
+    border-radius:12px;
+    border:none;
+}
+
+/* copy */
+.copy{
+    text-align:center;
+    padding:12px;
+    font-size:12px;
+    opacity:.7;
+    background:rgba(0,0,0,0.2);
+}
+
+/* =========================
+   OVERLAY CARRITO PRO
+========================= */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+
+    z-index:999;
+}
+
+.overlay.show{
+    opacity:1;
+    visibility:visible;
+}
+
+/* =========================
+   CARRITO LATERAL PRO
+========================= */
+
+.cart-panel{
+    position:fixed;
+    top:0;
+    right:-420px;
+
+    width:380px;
+    height:100vh;
+
+    background:#0b1220;
+    color:white;
+
+    display:flex;
+    flex-direction:column;
+
+    box-shadow:-10px 0 40px rgba(0,0,0,0.3);
+    transition:.35s ease;
+
+    z-index:1000;
+}
+
+.cart-panel.open{
+    right:0;
+}
+
+/* header */
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 20px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.cart-header button{
+    background:none;
+    border:none;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* items */
+.cart-items{
+    flex:1;
+    overflow-y:auto;
+    padding:14px;
+}
+
+.cart-item{
+    display:flex;
+    gap:12px;
+
+    background:rgba(255,255,255,0.05);
+    padding:10px;
+    border-radius:14px;
+
+    margin-bottom:10px;
+
+    animation:fadeIn .25s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(8px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.cart-item img{
+    width:55px;
+    height:55px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.cart-info h4{
+    font-size:14px;
+}
+
+.cart-info small{
+    font-size:11px;
+    opacity:.7;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:6px;
+}
+
+.qty button{
+    width:24px;
+    height:24px;
+    border-radius:6px;
+    border:none;
+    background:rgba(255,255,255,0.1);
+    color:white;
+    cursor:pointer;
+}
+
+/* footer */
+.cart-footer{
+    padding:16px;
+    border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.whatsapp-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+
+    background:#25D366;
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.whatsapp-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVE PRO MOBILE
+========================= */
+
+    @media (max-width:768px){
+
+    /* NAVBAR COMPACTA */
+    .navbar-custom{
+        padding:10px 16px;
+        height:120px; /* altura fija */
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    /* LOGO GRANDE SIN AGRANDAR NAVBAR */
+    .logo{
+        position:absolute;
+        left:-15px;
+        top:40%;
+        transform:translateY(-50%);
+        height:170px; /* 🔥 lo que querías */
+        pointer-events:none;
+    }
+
+    /* NAV */
+    .navbar-custom nav{
+       margin-top:90px;
+    }
+
+    /* CARRITO MÁS GRANDE */
+    .cart{
+        right:12px;
+        top:50%;
+        transform:translateY(-50%);
+        
+    }
+
+    .cart img{
+        width:75px; /* 🔥 más grande */
+    }
+
+    .cart span{
+        right:5px;
+        top:-4px;
+        font-size:10px;
+    }
+
+    /* HERO */
+    .catalogo-hero{
+        margin-top:10px;
+        padding:30px 16px 20px;
+       
+    }
+
+    .catalogo-hero h1{
+        font-size:26px;
+        line-height:1.2;
+    }
+
+    .catalogo-hero p{
+        font-size:14px;
+    }
+
+    /* FILTROS */
+    .categorias-filtro{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px;
+    padding:12px;
+}
+
+.cat{
+    width:100%;
+    text-align:center;
+    padding:10px;
+    font-size:13px;
+    border-radius:14px;
+}
+
+    /* GRID PRODUCTOS */
+    .catalogo-grid{
+        grid-template-columns:1fr; /* 1 columna */
+        padding:16px;
+        gap:16px;
+    }
+
+    /* CARD */
+    .card-producto{
+        border-radius:14px;
+    }
+
+    .card-producto img{
+        height:160px;
+    }
+
+    .card-body h3{
+        font-size:15px;
+    }
+
+    .card-body p{
+        font-size:12px;
+    }
+
+    .precio{
+        font-size:15px;
+    }
+
+    .card-body button{
+        padding:9px;
+        font-size:12px;
+    }
+
+    /* BANNER */
+    .catalogo-banner{
+        padding:16px;
+    }
+
+    .catalogo-banner img{
+        max-height:180px;
+    }
+
+    /* FOOTER */
+    .footer-content{
+        grid-template-columns:1fr;
+        padding:30px 20px;
+        gap:20px;
+    }
+
+    .mapa iframe{
+        height:120px;
+    }
+
+    /* CARRITO */
+    .cart-panel{
+        width:100%;
+        right:-100%;
+    }
+
+    .cart-item{
+        gap:10px;
+    }
+
+    .cart-item img{
+        width:50px;
+        height:50px;
+    }
+
+}
+

@@ -1,0 +1,387 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background:#f5f7fb;
+}
+
+/* NAVBAR */
+.navbar-custom{
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center; /* centramos el nav */
+
+    padding:55px 40px;
+    background: linear-gradient(
+        to right,
+        #020617,
+        #0a1e50,
+        #1c3faa
+    );
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    z-index:1000;
+
+    position: relative; /* 🔥 clave para absolute */
+}
+
+/* LOGO GRANDE SIN ROMPER */
+.logo{
+    position:absolute;
+    left:10px;
+    top:50%;
+    transform:translateY(-50%);
+
+    height:300px; 
+}
+
+/* NAV */
+.navbar-custom nav{
+    display:flex;
+    gap:30px;
+}
+
+.navbar-custom a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+}
+
+
+/* HERO */
+.hero{
+    margin-top:90px;
+}
+
+.carousel img{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+}
+
+.hero-text{
+    position:absolute;
+    top:50%;
+    left:50px;
+    transform:translateY(-50%);
+    color:white;
+}
+
+.hero-text h1{
+    font-size:40px;
+    
+}
+
+.hero-text button{
+    margin-top:10px;
+    padding:10px 20px;
+    border:none;
+    border-radius:30px;
+    background:#0a1e50;
+    color:white;
+}
+
+/* CATEGORIAS */
+.categorias{
+    padding:60px 40px;
+    text-align:center;
+}
+
+.categorias h2{
+    margin-bottom:30px;
+    color:#0a1e50;
+}
+
+.categorias-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+}
+
+.cat{
+    padding:12px 25px;
+    border-radius:30px;
+  background: linear-gradient(
+    135deg,
+    #1c3faa,
+    #3b82f6,
+    #60a5fa
+);
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    cursor:pointer;
+    transition:0.3s;
+    color:white;
+}
+
+.cat:hover{
+    background:#0a1e50;
+    color:white;
+}
+
+/* PROMO */
+.promo{
+    padding:40px;
+}
+
+.promo-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    grid-template-rows:200px 200px 150px;
+    gap:15px;
+}
+
+.promo-grid img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:15px;
+}
+
+.promo-big{
+    grid-row:span 2;
+}
+
+.promo-banner{
+    grid-column:span 2;
+}
+
+/* CTA */
+.cta{
+    text-align:center;
+    padding:60px;
+    background:#0a1e50;
+    color:white;
+}
+
+.cta button{
+    margin-top:15px;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#0a1e50;
+}
+
+/* FOOTER */
+.footer{
+    background: linear-gradient(
+        to right,
+        #020617,
+        #0a1e50,
+        #1c3faa
+    );
+    color: white;
+    margin-top: 60px;
+}
+
+/* CONTENEDOR */
+.footer-content{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:40px;
+
+    padding:60px 40px;
+}
+
+/* BLOQUES */
+.footer-content h3{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.footer-content p{
+    margin:5px 0;
+    opacity:0.85;
+}
+
+/* CONTENEDOR */
+.redes{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+/* BOTONES */
+.redes a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+    background: rgba(255,255,255,0.1);
+
+    backdrop-filter: blur(6px);
+
+    transition: all 0.3s ease;
+}
+
+/* ICONOS */
+.redes a img{
+    width:50px;
+    
+   
+}
+
+/* HOVER GENERAL */
+.redes a:hover{
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* IDENTIDAD POR RED */
+.redes a:nth-child(1):hover{
+    background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+}
+
+.redes a:nth-child(2):hover{
+    background: #1877f2;
+}
+
+.redes a:nth-child(3):hover{
+    background: #25d366;
+}
+
+/* MAPA */
+.mapa iframe{
+    width:100%;
+    height:160px;
+    border:none;
+    border-radius:12px;
+    filter: grayscale(100%) contrast(1.1);
+}
+
+/* COPY */
+.copy{
+    text-align:center;
+    padding:15px;
+    font-size:14px;
+
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+}
+
+@media (max-width:768px){
+
+    /* NAVBAR COMPACTA */
+    .navbar-custom{
+        padding:10px 16px;
+        height:120px; /* altura fija */
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    /* LOGO GRANDE SIN AGRANDAR NAVBAR */
+    .logo{
+        position:absolute;
+        left:-15px;
+        top:40%;
+        transform:translateY(-50%);
+        height:170px; /* 🔥 lo que querías */
+        pointer-events:none;
+    }
+
+    /* NAV */
+    .navbar-custom nav{
+       margin-top:90px;
+    }
+
+    /* CARRITO MÁS GRANDE */
+    .cart{
+        right:12px;
+        top:50%;
+        transform:translateY(-50%);
+        
+    }
+
+    .cart img{
+        width:75px; /* 🔥 más grande */
+    }
+
+    .cart span{
+        right:5px;
+        top:-4px;
+        font-size:10px;
+    }
+
+    /* HERO MÁS PEGADO */
+    .hero{
+        margin-top:10px; /* igual que navbar */
+    }
+
+    .carousel img{
+        height:160px;
+    }
+
+    .hero-text{
+        left:16px;
+        right:16px;
+    }
+
+    .hero-text h1{
+        font-size:22px;
+    }
+
+    /* CATEGORÍAS MEJOR ORDENADAS */
+    .categorias{
+        padding:30px 16px;
+    }
+
+    .categorias-grid{
+        display:grid;
+        grid-template-columns:repeat(2, 1fr); /* 🔥 orden limpio */
+        gap:10px;
+    }
+
+    .cat{
+        text-align:center;
+        padding:10px;
+        font-size:13px;
+        border-radius:20px;
+    }
+
+    /* PROMO */
+    .promo{
+        padding:16px;
+    }
+
+    
+    /* CTA */
+    .cta{
+        padding:30px 16px;
+    }
+
+    .cta h2{
+        font-size:20px;
+    }
+
+    /* FOOTER */
+    .footer-content{
+        grid-template-columns:1fr;
+        padding:30px 16px ;
+        gap:20px;
+        text-align:center;
+
+    }
+
+    .redes{
+        justify-content:center;
+    }
+
+    .mapa iframe{
+        height:120px;
+    }
+}
